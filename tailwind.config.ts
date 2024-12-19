@@ -22,6 +22,34 @@ export default {
         sans: ["Inter var", "sans-serif"],
         serif: ["Merriweather", "serif"],
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            'blockquote p:first-of-type::before': { content: 'none' },
+            'blockquote p:first-of-type::after': { content: 'none' },
+            'code::before': { content: 'none' },
+            'code::after': { content: 'none' },
+          },
+        },
+        xl: {
+          css: {
+            fontSize: '1.25rem',
+            lineHeight: '1.8',
+            p: {
+              marginTop: '1.5em',
+              marginBottom: '1.5em',
+            },
+            h2: {
+              marginTop: '2em',
+              marginBottom: '1em',
+            },
+            h3: {
+              marginTop: '1.5em',
+              marginBottom: '0.75em',
+            },
+          },
+        },
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -88,5 +116,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;
