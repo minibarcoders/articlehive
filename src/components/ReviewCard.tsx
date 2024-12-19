@@ -32,13 +32,13 @@ export const ReviewCard = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="group cursor-pointer bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+        className="group cursor-pointer bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
       >
         <div className="relative overflow-hidden aspect-[16/9]">
           <img
             src={imageUrl}
             alt={title}
-            className="object-cover w-full h-full transform transition-transform duration-300 group-hover:scale-105"
+            className="object-cover w-full h-full transform transition-transform duration-500 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent" />
         </div>
@@ -52,7 +52,7 @@ export const ReviewCard = ({
           </div>
           
           <div className="space-y-2">
-            <h3 className="text-xl font-semibold leading-tight group-hover:text-purple-600 transition-colors">
+            <h3 className="text-xl font-semibold leading-tight group-hover:text-purple-600 transition-colors duration-300">
               {title}
             </h3>
             <p className="text-gray-600 line-clamp-2">{excerpt}</p>

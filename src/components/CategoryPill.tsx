@@ -9,7 +9,7 @@ export const CategoryPill = ({ name, className }: CategoryPillProps) => {
   return (
     <span
       className={cn(
-        "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 transition-all hover:bg-gray-200",
+        "inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 transition-all duration-300 hover:bg-gray-200 hover:scale-105",
         className
       )}
     >
