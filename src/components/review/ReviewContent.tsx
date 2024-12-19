@@ -1,12 +1,12 @@
 import ReactMarkdown from "react-markdown";
 import { motion } from "framer-motion";
 import { TagList } from "../TagList";
+import { TableOfContents } from "./TableOfContents";
 
 interface ReviewContentProps {
   content: string;
   imageUrl?: string;
   tags?: string[];
-  excerpt?: string;
 }
 
 export const ReviewContent = ({ content, imageUrl, tags = [] }: ReviewContentProps) => {
@@ -30,28 +30,42 @@ export const ReviewContent = ({ content, imageUrl, tags = [] }: ReviewContentPro
 
         <TagList tags={tags} baseUrl="/reviews" />
 
+        <TableOfContents content={content} />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="prose prose-xl max-w-none prose-headings:text-[#5600FF] prose-a:text-[#5600FF] prose-strong:text-black mt-8"
+          className="prose prose-xl max-w-none prose-headings:text-[#5600FF] prose-a:text-[#5600FF] prose-strong:text-black"
         >
           <ReactMarkdown
             components={{
+              h2: ({ children }) => {
+                const id = children
+                  .toString()
+                  .toLowerCase()
+                  .replace(/[^a-z0-9]+/g, '-');
+                return (
+                  <h2 id={id} className="text-4xl font-bold mt-12 mb-6 text-[#5600FF] scroll-mt-24">
+                    {children}
+                  </h2>
+                );
+              },
+              h3: ({ children }) => {
+                const id = children
+                  .toString()
+                  .toLowerCase()
+                  .replace(/[^a-z0-9]+/g, '-');
+                return (
+                  <h3 id={id} className="text-3xl font-bold mt-8 mb-4 text-[#5600FF] scroll-mt-24">
+                    {children}
+                  </h3>
+                );
+              },
               p: ({ children }) => (
                 <p className="text-xl leading-relaxed text-gray-800 mb-8">
                   {children}
                 </p>
-              ),
-              h2: ({ children }) => (
-                <h2 className="text-4xl font-bold mt-12 mb-6 text-[#5600FF]">
-                  {children}
-                </h2>
-              ),
-              h3: ({ children }) => (
-                <h3 className="text-3xl font-bold mt-8 mb-4 text-[#5600FF]">
-                  {children}
-                </h3>
               ),
               a: ({ children, href }) => (
                 <a
