@@ -40,11 +40,32 @@ export const ReviewContent = ({ content, imageUrl, tags = [] }: ReviewContentPro
         >
           <ReactMarkdown
             components={{
-              h2: ({ children }) => {
-                const id = children
-                  .toString()
-                  .toLowerCase()
-                  .replace(/[^a-z0-9]+/g, '-');
+              h2: ({ children, ...props }) => {
+                const text = children.toString().toLowerCase();
+                const id = text.replace(/[^a-z0-9]+/g, '-');
+                
+                if (text.includes('verdict')) {
+                  return (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5 }}
+                      className="my-12"
+                    >
+                      <h2
+                        {...props}
+                        id={id}
+                        className="relative p-8 rounded-xl bg-gradient-to-br from-purple-600/10 via-purple-400/5 to-blue-600/10 dark:from-purple-500/20 dark:via-purple-400/15 dark:to-blue-500/20 border-l-4 border-purple-600 dark:border-purple-400 shadow-lg backdrop-blur-sm scroll-mt-24"
+                      >
+                        <span className="absolute -top-4 left-6 px-4 py-1 bg-purple-600 text-white text-sm rounded-full shadow-lg">
+                          Verdict
+                        </span>
+                        {children}
+                      </h2>
+                    </motion.div>
+                  );
+                }
+                
                 return (
                   <h2 id={id} className="text-4xl font-bold mt-12 mb-6 text-[#7F00FF] scroll-mt-24">
                     {children}
@@ -70,8 +91,11 @@ export const ReviewContent = ({ content, imageUrl, tags = [] }: ReviewContentPro
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.5 }}
-                      className="my-8 p-6 bg-gradient-to-br from-purple-600/10 to-blue-600/10 dark:from-purple-500/20 dark:to-blue-500/20 rounded-xl border-l-4 border-purple-600 dark:border-purple-400 shadow-lg backdrop-blur-sm"
+                      className="my-12 p-8 bg-gradient-to-br from-purple-600/10 via-purple-400/5 to-blue-600/10 dark:from-purple-500/20 dark:via-purple-400/15 dark:to-blue-500/20 rounded-xl border-l-4 border-purple-600 dark:border-purple-400 shadow-lg backdrop-blur-sm relative"
                     >
+                      <span className="absolute -top-4 left-6 px-4 py-1 bg-purple-600 text-white text-sm rounded-full shadow-lg">
+                        Verdict
+                      </span>
                       <div className="font-serif italic text-2xl leading-relaxed text-foreground dark:text-gray-200">
                         {children}
                       </div>
