@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/lib/supabase/client";
 import { ArrowLeft } from "lucide-react";
+import { ImageUpload } from "./ImageUpload";
 import type { Guide, Review } from "@/lib/supabase/types";
 
 interface ContentFormProps {
@@ -123,11 +124,13 @@ export const ContentForm = ({ type, initialData, onClose }: ContentFormProps) =>
           required
         />
 
-        <Input
-          placeholder="Image URL"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-        />
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Featured Image</label>
+          <ImageUpload
+            onImageUploaded={setImageUrl}
+            currentImageUrl={imageUrl}
+          />
+        </div>
 
         <Input
           placeholder="Author"
