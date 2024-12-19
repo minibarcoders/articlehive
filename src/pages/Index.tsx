@@ -92,12 +92,12 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Latest Reviews Section */}
+      {/* Featured Reviews Section */}
       <section className="relative bg-accent py-24">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-foreground mb-2">Latest Reviews</h2>
+              <h2 className="text-3xl font-bold text-foreground mb-2">Featured Reviews</h2>
               <p className="text-foreground dark:text-gray-300">Our most recent in-depth tech reviews</p>
             </div>
             <Link to="/reviews" className="text-foreground hover:text-foreground/80 font-medium">
