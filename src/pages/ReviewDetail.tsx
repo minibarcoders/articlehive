@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/client";
 import { ReviewHero } from "@/components/review/ReviewHero";
 import { ReviewContent } from "@/components/review/ReviewContent";
+import { ReviewQuickTake } from "@/components/review/ReviewQuickTake";
 
 const fetchReview = async (id: string) => {
   const { data, error } = await supabase
@@ -52,6 +53,15 @@ const ReviewDetail = () => {
     );
   }
 
+  // Mock ratings for demonstration - in production these would come from the review data
+  const ratings = {
+    overall: Math.round(review.rating * 2), // Convert 5-star to 10-point scale
+    design: 9,
+    features: 8,
+    performance: 10,
+    value: 8,
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -63,11 +73,24 @@ const ReviewDetail = () => {
           author={review.author}
           category={review.category}
         />
-        <ReviewContent 
-          content={review.content} 
-          imageUrl={review.image_url} 
-          tags={review.tags}
-        />
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <ReviewContent 
+                content={review.content} 
+                imageUrl={review.image_url} 
+                tags={review.tags}
+              />
+            </div>
+            <div className="lg:sticky lg:top-24 h-fit">
+              <ReviewQuickTake
+                title={review.title}
+                excerpt={review.excerpt}
+                ratings={ratings}
+              />
+            </div>
+          </div>
+        </div>
       </article>
     </div>
   );
