@@ -1,8 +1,10 @@
 import { Header } from "@/components/Header";
 import { FeaturedArticle } from "@/components/FeaturedArticle";
 import { ArticleGrid } from "@/components/ArticleGrid";
+import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/client";
+import { Link } from "react-router-dom";
 
 const fetchLatestContent = async () => {
   const { data: guides, error: guidesError } = await supabase
@@ -34,7 +36,7 @@ const Index = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
         <Header />
         <main className="container mx-auto px-4 pt-24 pb-12">
           <div>Loading...</div>
@@ -45,7 +47,7 @@ const Index = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
         <Header />
         <main className="container mx-auto px-4 pt-24 pb-12">
           <div>Error loading content</div>
@@ -61,9 +63,42 @@ const Index = () => {
   ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
       <Header />
-      <main className="container mx-auto px-4 pt-24 pb-12 space-y-12">
+      
+      {/* Hero Section */}
+      <section className="container mx-auto px-4 pt-32 pb-24 text-center">
+        <h1 className="text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
+          Your Trusted Source
+          <br />
+          for Tech Reviews
+        </h1>
+        <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+          In-depth reviews, expert analysis, and the latest insights on technology products that matter to you.
+        </p>
+        <div className="flex gap-4 justify-center">
+          <Link to="/reviews">
+            <Button size="lg" className="bg-purple-600 hover:bg-purple-700">
+              Browse Reviews
+            </Button>
+          </Link>
+          <Link to="/guides">
+            <Button size="lg" variant="outline" className="border-purple-600 text-purple-600 hover:bg-purple-50">
+              Read Our Guides
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Latest Reviews Section */}
+      <section className="container mx-auto px-4 pb-24">
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-bold">Latest Reviews</h2>
+          <Link to="/reviews" className="text-purple-600 hover:text-purple-700 font-medium">
+            View all reviews →
+          </Link>
+        </div>
+        
         {featuredArticle && (
           <FeaturedArticle
             id={featuredArticle.id}
@@ -82,8 +117,7 @@ const Index = () => {
           />
         )}
 
-        <section>
-          <h2 className="text-3xl font-bold mb-8">Latest Articles</h2>
+        <div className="mt-12">
           <ArticleGrid
             articles={otherArticles.map(article => ({
               id: article.id,
@@ -101,8 +135,8 @@ const Index = () => {
               href: `/${article.rating ? 'reviews' : 'guides'}/${article.id}`
             }))}
           />
-        </section>
-      </main>
+        </div>
+      </section>
     </div>
   );
 };
