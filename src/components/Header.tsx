@@ -24,7 +24,7 @@ export const Header = () => {
               <img 
                 src="/lovable-uploads/b1cc5754-becb-4c0c-a856-8ec74be03deb.png" 
                 alt="Fixed Custom Logo" 
-                className="h-10 w-auto"
+                className="h-10 w-auto dark:invert dark:brightness-200 transition-all duration-200"
               />
             </Link>
             
