@@ -17,11 +17,12 @@ export const Header = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          <Link 
-            to="/" 
-            className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-          >
-            TechReview
+          <Link to="/" className="hover:opacity-80 transition-opacity">
+            <img 
+              src="/lovable-uploads/b1cc5754-becb-4c0c-a856-8ec74be03deb.png" 
+              alt="Fixed Custom Logo" 
+              className="h-10 w-auto"
+            />
           </Link>
           
           <nav className="hidden md:flex space-x-1">
@@ -46,7 +47,6 @@ export const Header = () => {
           </nav>
 
           <div className="md:hidden">
-            {/* Mobile menu button - keeping it simple for now */}
             <button className="p-2 rounded-md text-gray-600 hover:text-purple-600 hover:bg-white/50 transition-colors">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
