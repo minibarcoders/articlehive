@@ -1,4 +1,3 @@
-import { Header } from "@/components/Header";
 import { FeaturedArticle } from "@/components/FeaturedArticle";
 import { ArticleGrid } from "@/components/ArticleGrid";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import { Feed } from "@/components/Feed";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/client";
 import { Link } from "react-router-dom";
+import { Header } from "@/components/Header";
 
 const Index = () => {
   const { data, isLoading, error } = useQuery({
@@ -23,8 +23,16 @@ const Index = () => {
         .order("date", { ascending: false })
         .limit(3);
 
+      // Fetch popular items (based on rating for reviews)
+      const { data: popularReviews, error: popularReviewsError } = await supabase
+        .from("reviews")
+        .select("*")
+        .order("rating", { ascending: false })
+        .limit(5);
+
       if (guidesError) throw guidesError;
       if (reviewsError) throw reviewsError;
+      if (popularReviewsError) throw popularReviewsError;
 
       // Create feed items from guides and reviews
       const feedItems = [
@@ -63,6 +71,7 @@ const Index = () => {
         guides: guides || [],
         reviews: reviews || [],
         feedItems,
+        popularItems: popularReviews || [],
       };
     },
   });
@@ -158,17 +167,45 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Feed Section */}
+      {/* Feed and Popular Items Section */}
       <section className="relative bg-background py-24">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-12">
-            <div>
-              <h2 className="text-3xl font-bold text-foreground mb-2">Latest Updates</h2>
-              <p className="text-foreground/90 dark:text-gray-300">Stay up to date with our latest content</p>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Feed Column */}
+            <div className="lg:col-span-2">
+              <div className="flex justify-between items-center mb-8">
+                <div>
+                  <h2 className="text-2xl font-bold text-foreground mb-2">Latest Updates</h2>
+                  <p className="text-foreground/90 dark:text-gray-300">Stay up to date with our latest content</p>
+                </div>
+              </div>
+              
+              {data?.feedItems && <Feed items={data.feedItems} />}
+            </div>
+
+            {/* Popular Items Column */}
+            <div className="space-y-6">
+              <div>
+                <h2 className="text-2xl font-bold text-foreground mb-6">Popular Reviews</h2>
+                <div className="space-y-4">
+                  {data?.popularItems.map((item) => (
+                    <Link
+                      key={item.id}
+                      to={`/reviews/${item.id}`}
+                      className="block p-4 rounded-lg bg-accent/50 hover:bg-accent transition-colors duration-200"
+                    >
+                      <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <span>Rating: {item.rating}/5</span>
+                        <span>•</span>
+                        <span>{item.category}</span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-          
-          {data?.feedItems && <Feed items={data.feedItems} />}
         </div>
       </section>
     </div>
