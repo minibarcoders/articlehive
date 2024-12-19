@@ -46,26 +46,27 @@ export const TableOfContents = ({ content }: TableOfContentsProps) => {
   if (chapters.length === 0) return null;
 
   return (
-    <Card className="mb-8">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+    <Card className="mb-6">
+      <CardHeader className="py-3">
+        <CardTitle className="flex items-center gap-2 text-base">
           <Link className="w-4 h-4" />
           Chapters
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="py-2">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="space-y-2"
+          className="space-y-1"
         >
           {chapters.map((chapter) => (
             <Button
               key={chapter.id}
               variant="ghost"
-              className={`w-full justify-start ${
-                chapter.level === 2 ? 'pl-4' : 'pl-8'
+              size="sm"
+              className={`w-full justify-start text-sm h-8 ${
+                chapter.level === 2 ? 'pl-2' : 'pl-4'
               }`}
               onClick={() => scrollToSection(chapter.id)}
             >
