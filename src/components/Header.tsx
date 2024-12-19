@@ -25,7 +25,7 @@ export const Header = () => {
             />
           </Link>
           
-          <nav className="hidden md:flex space-x-1">
+          <nav className="hidden md:flex space-x-2">
             {[
               { path: "/", label: "Latest" },
               { path: "/reviews", label: "Reviews" },
@@ -35,7 +35,7 @@ export const Header = () => {
               <Link
                 key={path}
                 to={path}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                className={`px-6 py-2.5 rounded-full text-base font-medium transition-all duration-200 ${
                   isActiveLink(path)
                     ? "bg-white text-purple-600 shadow-sm"
                     : "text-gray-600 hover:text-purple-600 hover:bg-white/50"
