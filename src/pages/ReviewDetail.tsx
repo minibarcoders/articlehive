@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/client";
 import { format } from "date-fns";
+import ReactMarkdown from "react-markdown";
 
 const fetchReview = async (id: string) => {
   const { data, error } = await supabase
@@ -89,8 +90,9 @@ const ReviewDetail = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               className="prose prose-lg max-w-none prose-headings:text-purple-600 prose-a:text-blue-600"
-              dangerouslySetInnerHTML={{ __html: review.content }}
-            />
+            >
+              <ReactMarkdown>{review.content}</ReactMarkdown>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
