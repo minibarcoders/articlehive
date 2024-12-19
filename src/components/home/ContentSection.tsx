@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Feed } from "@/components/Feed";
 
 interface ContentSectionProps {
