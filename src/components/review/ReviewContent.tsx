@@ -62,6 +62,28 @@ export const ReviewContent = ({ content, imageUrl, tags = [] }: ReviewContentPro
                   </h3>
                 );
               },
+              blockquote: ({ children }) => {
+                const text = children.toString();
+                if (text.toLowerCase().includes('verdict')) {
+                  return (
+                    <motion.blockquote
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5 }}
+                      className="my-8 p-6 bg-gradient-to-br from-purple-600/10 to-blue-600/10 dark:from-purple-500/20 dark:to-blue-500/20 rounded-xl border-l-4 border-purple-600 dark:border-purple-400 shadow-lg backdrop-blur-sm"
+                    >
+                      <div className="font-serif italic text-2xl leading-relaxed text-foreground dark:text-gray-200">
+                        {children}
+                      </div>
+                    </motion.blockquote>
+                  );
+                }
+                return (
+                  <blockquote className="border-l-4 border-gray-300 pl-4 italic">
+                    {children}
+                  </blockquote>
+                );
+              },
               p: ({ children }) => (
                 <p className="text-xl leading-relaxed text-foreground dark:text-gray-300 mb-8">
                   {children}
