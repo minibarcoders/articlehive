@@ -1,12 +1,14 @@
 import ReactMarkdown from "react-markdown";
 import { motion } from "framer-motion";
+import { TagList } from "../TagList";
 
 interface ReviewContentProps {
   content: string;
   imageUrl?: string;
+  tags?: string[];
 }
 
-export const ReviewContent = ({ content, imageUrl }: ReviewContentProps) => {
+export const ReviewContent = ({ content, imageUrl, tags = [] }: ReviewContentProps) => {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-4xl mx-auto">
@@ -25,11 +27,13 @@ export const ReviewContent = ({ content, imageUrl }: ReviewContentProps) => {
           </motion.div>
         )}
 
+        <TagList tags={tags} baseUrl="/reviews" />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="prose prose-xl max-w-none prose-headings:text-[#5600FF] prose-a:text-[#5600FF] prose-strong:text-black"
+          className="prose prose-xl max-w-none prose-headings:text-[#5600FF] prose-a:text-[#5600FF] prose-strong:text-black mt-8"
         >
           <ReactMarkdown
             components={{

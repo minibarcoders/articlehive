@@ -19,6 +19,7 @@ export type Database = {
           id: string
           image_url: string | null
           read_time: string
+          tags: string[]
           title: string
         }
         Insert: {
@@ -30,6 +31,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           read_time: string
+          tags?: string[]
           title: string
         }
         Update: {
@@ -41,6 +43,7 @@ export type Database = {
           id?: string
           image_url?: string | null
           read_time?: string
+          tags?: string[]
           title?: string
         }
         Relationships: []
@@ -58,6 +61,7 @@ export type Database = {
           pros: string[]
           rating: number
           read_time: string
+          tags: string[]
           title: string
         }
         Insert: {
@@ -72,6 +76,7 @@ export type Database = {
           pros?: string[]
           rating: number
           read_time: string
+          tags?: string[]
           title: string
         }
         Update: {
@@ -86,6 +91,7 @@ export type Database = {
           pros?: string[]
           rating?: number
           read_time?: string
+          tags?: string[]
           title?: string
         }
         Relationships: []

@@ -6,6 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/lib/supabase/client";
 import { ArrowLeft } from "lucide-react";
 import { ImageUpload } from "./ImageUpload";
+import { TagInput } from "@/components/TagInput";
 import type { Guide, Review } from "@/lib/supabase/types";
 
 interface ContentFormProps {
@@ -24,6 +25,7 @@ export const ContentForm = ({ type, initialData, onClose }: ContentFormProps) =>
   const [imageUrl, setImageUrl] = useState(initialData?.image_url || "");
   const [author, setAuthor] = useState(initialData?.author || "");
   const [readTime, setReadTime] = useState(initialData?.read_time || "");
+  const [tags, setTags] = useState<string[]>(initialData?.tags || []);
   const [rating, setRating] = useState(
     type === "review" && initialData && "rating" in initialData ? initialData.rating : 5
   );
@@ -47,6 +49,7 @@ export const ContentForm = ({ type, initialData, onClose }: ContentFormProps) =>
         image_url: imageUrl,
         author,
         read_time: readTime,
+        tags,
         ...(type === "review" && {
           rating,
           pros: pros.filter(Boolean),
@@ -123,6 +126,11 @@ export const ContentForm = ({ type, initialData, onClose }: ContentFormProps) =>
           onChange={(e) => setCategory(e.target.value)}
           required
         />
+
+        <div className="space-y-2">
+          <label className="text-sm font-medium">Tags</label>
+          <TagInput tags={tags} onChange={setTags} />
+        </div>
 
         <div className="space-y-2">
           <label className="text-sm font-medium">Featured Image</label>

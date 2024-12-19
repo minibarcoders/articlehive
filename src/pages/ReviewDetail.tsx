@@ -63,7 +63,11 @@ const ReviewDetail = () => {
           author={review.author}
           category={review.category}
         />
-        <ReviewContent content={review.content} imageUrl={review.image_url} />
+        <ReviewContent 
+          content={review.content} 
+          imageUrl={review.image_url} 
+          tags={review.tags}
+        />
       </article>
     </div>
   );
