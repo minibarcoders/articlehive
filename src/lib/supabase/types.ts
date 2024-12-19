@@ -42,6 +42,7 @@ export interface Guide {
   date: string;
   author: string;
   read_time: string;
+  tags: string[];
 }
 
 export interface Review {
@@ -57,4 +58,5 @@ export interface Review {
   read_time: string;
   pros: string[];
   cons: string[];
+  tags: string[];
 }
