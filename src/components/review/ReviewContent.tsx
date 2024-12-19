@@ -9,7 +9,7 @@ interface ReviewContentProps {
   excerpt?: string;
 }
 
-export const ReviewContent = ({ content, imageUrl, tags = [], excerpt }: ReviewContentProps) => {
+export const ReviewContent = ({ content, imageUrl, tags = [] }: ReviewContentProps) => {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-4xl mx-auto">
@@ -26,17 +26,6 @@ export const ReviewContent = ({ content, imageUrl, tags = [], excerpt }: ReviewC
               className="w-full aspect-video object-cover"
             />
           </motion.div>
-        )}
-
-        {excerpt && (
-          <motion.blockquote
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl font-serif italic text-gray-700 my-8 px-8 border-l-4 border-[#5600FF]"
-          >
-            "{excerpt}"
-          </motion.blockquote>
         )}
 
         <TagList tags={tags} baseUrl="/reviews" />

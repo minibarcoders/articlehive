@@ -64,7 +64,9 @@ export const ReviewHero = ({ title, excerpt, date, author, category }: ReviewHer
 
           <div className="space-y-4">
             <h1 className="text-5xl font-bold leading-tight">{title}</h1>
-            <p className="text-xl text-white/80">{excerpt}</p>
+            <blockquote className="text-2xl font-serif italic text-white/90 border-l-4 border-white/30 pl-6">
+              "{excerpt}"
+            </blockquote>
           </div>
 
           <div className="text-sm">
