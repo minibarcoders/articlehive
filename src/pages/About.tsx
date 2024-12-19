@@ -13,11 +13,11 @@ const About = () => {
           className="max-w-3xl mx-auto bg-card rounded-2xl shadow-lg p-8"
         >
           <h1 className="text-4xl font-bold mb-8 text-foreground">
-            About TechReview
+            About FixedorCustom
           </h1>
           <div className="prose prose-lg">
             <p className="text-foreground dark:text-gray-300 mb-6">
-              Welcome to TechReview, your trusted source for in-depth technology reviews, guides, and insights. Our team of experts is dedicated to bringing you the most comprehensive and unbiased coverage of the latest tech products and trends.
+              Welcome to FixedorCustom, your trusted source for in-depth technology reviews, guides, and insights. Our team of experts is dedicated to bringing you the most comprehensive and unbiased coverage of the latest tech products and trends.
             </p>
             <h2 className="text-2xl font-semibold mb-4 text-foreground">
               Our Mission
