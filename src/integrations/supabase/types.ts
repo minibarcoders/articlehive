@@ -9,7 +9,87 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      guides: {
+        Row: {
+          author: string
+          category: string
+          content: string
+          date: string
+          excerpt: string
+          id: string
+          image_url: string | null
+          read_time: string
+          title: string
+        }
+        Insert: {
+          author: string
+          category: string
+          content: string
+          date?: string
+          excerpt: string
+          id?: string
+          image_url?: string | null
+          read_time: string
+          title: string
+        }
+        Update: {
+          author?: string
+          category?: string
+          content?: string
+          date?: string
+          excerpt?: string
+          id?: string
+          image_url?: string | null
+          read_time?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      reviews: {
+        Row: {
+          author: string
+          category: string
+          cons: string[]
+          content: string
+          date: string
+          excerpt: string
+          id: string
+          image_url: string | null
+          pros: string[]
+          rating: number
+          read_time: string
+          title: string
+        }
+        Insert: {
+          author: string
+          category: string
+          cons?: string[]
+          content: string
+          date?: string
+          excerpt: string
+          id?: string
+          image_url?: string | null
+          pros?: string[]
+          rating: number
+          read_time: string
+          title: string
+        }
+        Update: {
+          author?: string
+          category?: string
+          cons?: string[]
+          content?: string
+          date?: string
+          excerpt?: string
+          id?: string
+          image_url?: string | null
+          pros?: string[]
+          rating?: number
+          read_time?: string
+          title?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
