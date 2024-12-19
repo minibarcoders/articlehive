@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import { FeaturedArticle } from "@/components/FeaturedArticle";
 import { ArticleGrid } from "@/components/ArticleGrid";
 import { Button } from "@/components/ui/button";
+import { Feed } from "@/components/Feed";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase/client";
 import { Link } from "react-router-dom";
