@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase/client";
 import { ReviewHero } from "@/components/review/ReviewHero";
 import { ReviewContent } from "@/components/review/ReviewContent";
 import { ReviewQuickTake } from "@/components/review/ReviewQuickTake";
+import { ReviewSummary } from "@/components/review/ReviewSummary";
 import { useEffect, useState } from "react";
 
 const fetchReview = async (id: string) => {
@@ -37,7 +38,7 @@ const ReviewDetail = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -70,14 +71,6 @@ const ReviewDetail = () => {
     );
   }
 
-  const ratings = {
-    overall: Math.round(review.rating * 2),
-    design: 9,
-    features: 8,
-    performance: 10,
-    value: 8,
-  };
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -96,15 +89,19 @@ const ReviewDetail = () => {
                 content={review.content} 
                 imageUrl={review.image_url} 
                 tags={review.tags}
-                excerpt={review.excerpt}
               />
             </div>
-            <div className={`lg:sticky lg:top-32 h-fit transition-opacity duration-300 ${showQuickTake ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-              <ReviewQuickTake
-                title={review.title}
-                excerpt={review.excerpt}
-                ratings={ratings}
-              />
+            <div className="space-y-6">
+              <div className={`lg:sticky lg:top-32 space-y-6 transition-opacity duration-300 ${showQuickTake ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                <ReviewQuickTake
+                  title={review.title}
+                  excerpt={review.excerpt}
+                  rating={review.rating}
+                />
+                <ReviewSummary
+                  summary="Our team was thoroughly impressed with this product's innovative features and solid build quality. While there's room for improvement in some areas, it stands out as a strong contender in its category, offering excellent value for its price point."
+                />
+              </div>
             </div>
           </div>
         </div>
