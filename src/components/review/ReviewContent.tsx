@@ -36,7 +36,7 @@ export const ReviewContent = ({ content, imageUrl, tags = [] }: ReviewContentPro
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="prose prose-xl max-w-none prose-headings:text-[#7F00FF] prose-a:text-[#5600FF] prose-strong:text-white prose-p:text-gray-300"
+          className="prose prose-xl max-w-none prose-headings:text-[#7F00FF] prose-a:text-[#5600FF] prose-strong:text-foreground prose-p:text-foreground dark:prose-p:text-gray-300"
         >
           <ReactMarkdown
             components={{
@@ -63,7 +63,7 @@ export const ReviewContent = ({ content, imageUrl, tags = [] }: ReviewContentPro
                 );
               },
               p: ({ children }) => (
-                <p className="text-xl leading-relaxed text-gray-300 mb-8">
+                <p className="text-xl leading-relaxed text-foreground dark:text-gray-300 mb-8">
                   {children}
                 </p>
               ),
@@ -76,17 +76,17 @@ export const ReviewContent = ({ content, imageUrl, tags = [] }: ReviewContentPro
                 </a>
               ),
               ul: ({ children }) => (
-                <ul className="list-disc pl-6 space-y-2 text-gray-300">
+                <ul className="list-disc pl-6 space-y-2 text-foreground dark:text-gray-300">
                   {children}
                 </ul>
               ),
               ol: ({ children }) => (
-                <ol className="list-decimal pl-6 space-y-2 text-gray-300">
+                <ol className="list-decimal pl-6 space-y-2 text-foreground dark:text-gray-300">
                   {children}
                 </ol>
               ),
               li: ({ children }) => (
-                <li className="text-gray-300">
+                <li className="text-foreground dark:text-gray-300">
                   {children}
                 </li>
               ),
