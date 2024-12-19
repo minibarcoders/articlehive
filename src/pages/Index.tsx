@@ -23,7 +23,12 @@ const Index = () => {
         .order("date", { ascending: false })
         .limit(3);
 
-      // Fetch popular items (based on rating for reviews)
+      const { data: posts, error: postsError } = await supabase
+        .from("posts")
+        .select("*")
+        .order("date", { ascending: false })
+        .limit(5);
+
       const { data: popularReviews, error: popularReviewsError } = await supabase
         .from("reviews")
         .select("*")
@@ -32,10 +37,25 @@ const Index = () => {
 
       if (guidesError) throw guidesError;
       if (reviewsError) throw reviewsError;
+      if (postsError) throw postsError;
       if (popularReviewsError) throw popularReviewsError;
 
-      // Create feed items from guides and reviews
+      // Create feed items from guides, reviews, and posts
       const feedItems = [
+        ...(posts?.map(post => ({
+          id: post.id,
+          type: 'post' as const,
+          title: post.title,
+          content: post.content,
+          category: post.category,
+          author: post.author,
+          date: new Date(post.date).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }),
+          imageUrl: post.image_url,
+        })) || []),
         ...(reviews?.map(review => ({
           id: review.id,
           type: 'review' as const,

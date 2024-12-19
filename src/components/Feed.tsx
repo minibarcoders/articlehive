@@ -47,14 +47,25 @@ export const Feed = ({ items }: { items: FeedItem[] }) => {
                 <time className="text-sm text-muted-foreground">{item.date}</time>
               </div>
               
-              <Link to={`/${item.type}s/${item.id}`} className="block group">
-                <h3 className="text-lg font-semibold text-foreground group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
-                  {item.title}
-                </h3>
-                <p className="text-foreground/90 dark:text-gray-300 mt-2 line-clamp-2">
-                  {item.content}
-                </p>
-              </Link>
+              {item.type === 'post' ? (
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">
+                    {item.title}
+                  </h3>
+                  <p className="text-foreground/90 dark:text-gray-300 mt-2">
+                    {item.content}
+                  </p>
+                </div>
+              ) : (
+                <Link to={`/${item.type}s/${item.id}`} className="block group">
+                  <h3 className="text-lg font-semibold text-foreground group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors duration-300">
+                    {item.title}
+                  </h3>
+                  <p className="text-foreground/90 dark:text-gray-300 mt-2 line-clamp-2">
+                    {item.content}
+                  </p>
+                </Link>
+              )}
 
               {item.imageUrl && (
                 <img

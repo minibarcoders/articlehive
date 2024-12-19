@@ -12,11 +12,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ContentForm } from "./ContentForm";
+import { PostForm } from "./PostForm";
 import type { Guide, Review } from "@/lib/supabase/types";
 
-const fetchContent = async (type: "guide" | "review") => {
+type ContentType = "guide" | "review" | "post";
+
+const fetchContent = async (type: ContentType) => {
   const { data, error } = await supabase
-    .from(type === "guide" ? "guides" : "reviews")
+    .from(type === "guide" ? "guides" : type === "review" ? "reviews" : "posts")
     .select("*")
     .order("date", { ascending: false });
 
@@ -27,17 +30,20 @@ const fetchContent = async (type: "guide" | "review") => {
 export const ContentList = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingItem, setEditingItem] = useState<Guide | Review | null>(null);
-  const [contentType, setContentType] = useState<"guide" | "review">("guide");
+  const [contentType, setContentType] = useState<ContentType>("guide");
 
   const { data: content, isLoading } = useQuery({
     queryKey: [contentType + "s"],
     queryFn: () => fetchContent(contentType),
   });
 
-  if (showForm || editingItem) {
+  if (showForm) {
+    if (contentType === "post") {
+      return <PostForm onClose={() => setShowForm(false)} />;
+    }
     return (
       <ContentForm
-        type={contentType}
+        type={contentType as "guide" | "review"}
         initialData={editingItem}
         onClose={() => {
           setShowForm(false);
@@ -52,11 +58,12 @@ export const ContentList = () => {
       <div className="flex justify-between items-center">
         <select
           value={contentType}
-          onChange={(e) => setContentType(e.target.value as "guide" | "review")}
+          onChange={(e) => setContentType(e.target.value as ContentType)}
           className="p-2 border rounded"
         >
           <option value="guide">Guides</option>
           <option value="review">Reviews</option>
+          <option value="post">Posts</option>
         </select>
         <Button onClick={() => setShowForm(true)}>
           <Plus className="mr-2" />
@@ -87,7 +94,12 @@ export const ContentList = () => {
                 <TableCell>
                   <Button
                     variant="outline"
-                    onClick={() => setEditingItem(item)}
+                    onClick={() => {
+                      if (contentType !== "post") {
+                        setEditingItem(item);
+                        setShowForm(true);
+                      }
+                    }}
                   >
                     Edit
                   </Button>

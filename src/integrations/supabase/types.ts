@@ -48,6 +48,39 @@ export type Database = {
         }
         Relationships: []
       }
+      posts: {
+        Row: {
+          author: string
+          category: string
+          content: string
+          date: string
+          id: string
+          image_url: string | null
+          tags: string[]
+          title: string
+        }
+        Insert: {
+          author: string
+          category: string
+          content: string
+          date?: string
+          id?: string
+          image_url?: string | null
+          tags?: string[]
+          title: string
+        }
+        Update: {
+          author?: string
+          category?: string
+          content?: string
+          date?: string
+          id?: string
+          image_url?: string | null
+          tags?: string[]
+          title?: string
+        }
+        Relationships: []
+      }
       reviews: {
         Row: {
           author: string

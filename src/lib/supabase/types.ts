@@ -19,6 +19,11 @@ export interface Database {
         Insert: Omit<Review, 'id' | 'date'>
         Update: Partial<Omit<Review, 'id' | 'date'>>
       }
+      posts: {
+        Row: Post
+        Insert: Omit<Post, 'id' | 'date'>
+        Update: Partial<Omit<Post, 'id' | 'date'>>
+      }
     }
     Views: {
       [_ in never]: never
@@ -58,5 +63,16 @@ export interface Review {
   read_time: string;
   pros: string[];
   cons: string[];
+  tags: string[];
+}
+
+export interface Post {
+  id: string;
+  title: string;
+  content: string;
+  category: string;
+  image_url: string | null;
+  date: string;
+  author: string;
   tags: string[];
 }
