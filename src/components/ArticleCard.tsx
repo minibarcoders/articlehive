@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import type { Article } from "./ArticleGrid";
 
 export const ArticleCard = ({
+  id,
   title,
   excerpt,
   category,

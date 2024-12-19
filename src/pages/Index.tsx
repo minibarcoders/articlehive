@@ -66,12 +66,17 @@ const Index = () => {
       <main className="container mx-auto px-4 pt-24 pb-12 space-y-12">
         {featuredArticle && (
           <FeaturedArticle
+            id={featuredArticle.id}
             title={featuredArticle.title}
             excerpt={featuredArticle.excerpt}
             imageUrl={featuredArticle.image_url || "/placeholder.svg"}
             category={featuredArticle.category}
             author={featuredArticle.author}
-            date={featuredArticle.date}
+            date={new Date(featuredArticle.date).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
             readTime={featuredArticle.read_time}
             href={`/${featuredArticle.rating ? 'reviews' : 'guides'}/${featuredArticle.id}`}
           />
@@ -81,12 +86,17 @@ const Index = () => {
           <h2 className="text-3xl font-bold mb-8">Latest Articles</h2>
           <ArticleGrid
             articles={otherArticles.map(article => ({
+              id: article.id,
               title: article.title,
               excerpt: article.excerpt,
               imageUrl: article.image_url || "/placeholder.svg",
               category: article.category,
               author: article.author,
-              date: article.date,
+              date: new Date(article.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              }),
               readTime: article.read_time,
               href: `/${article.rating ? 'reviews' : 'guides'}/${article.id}`
             }))}

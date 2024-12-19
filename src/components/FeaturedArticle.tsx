@@ -3,7 +3,7 @@ import { CategoryPill } from "./CategoryPill";
 import { Link } from "react-router-dom";
 
 export interface FeaturedArticleProps {
-  id: number;
+  id: string;
   title: string;
   excerpt: string;
   category: string;
