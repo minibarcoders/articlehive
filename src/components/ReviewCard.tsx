@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, Check, X } from "lucide-react";
 import { CategoryPill } from "./CategoryPill";
 import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
 
 interface ReviewCardProps {
   id?: number;
@@ -13,6 +14,10 @@ interface ReviewCardProps {
   date: string;
   author: string;
   readTime: string;
+  price?: string;
+  pros?: string[];
+  cons?: string[];
+  authorTitle?: string;
 }
 
 export const ReviewCard = ({
@@ -25,6 +30,10 @@ export const ReviewCard = ({
   date,
   author,
   readTime,
+  price,
+  pros = [],
+  cons = [],
+  authorTitle = "Senior Tech Reviewer",
 }: ReviewCardProps) => {
   return (
     <Link to={`/reviews/${id}`}>
@@ -32,7 +41,7 @@ export const ReviewCard = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="group cursor-pointer bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+        className="group cursor-pointer bg-gray-900 rounded-xl overflow-hidden hover:ring-2 hover:ring-purple-500/50 transition-all duration-300"
       >
         <div className="relative overflow-hidden aspect-[16/9]">
           <img
@@ -40,31 +49,63 @@ export const ReviewCard = ({
             alt={title}
             className="object-cover w-full h-full transform transition-transform duration-500 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent" />
-        </div>
-        <div className="p-6 space-y-4">
-          <div className="flex items-center justify-between">
-            <CategoryPill name={category} />
-            <div className="flex items-center space-x-1">
-              <Star className="w-4 h-4 text-yellow-400 fill-current" />
-              <span className="text-sm font-medium text-gray-900">{rating}</span>
-            </div>
+          <div className="absolute top-4 right-4 bg-black/80 rounded-full px-3 py-1 flex items-center gap-1">
+            <Star className="w-4 h-4 text-yellow-400 fill-current" />
+            <span className="text-white font-medium">{rating}/5</span>
           </div>
-          
-          <div className="space-y-2">
-            <h3 className="text-xl font-semibold leading-tight group-hover:text-purple-600 transition-colors duration-300">
-              {title}
-            </h3>
-            <p className="text-gray-600 line-clamp-2">{excerpt}</p>
+        </div>
+
+        <div className="p-6 space-y-4">
+          <div className="flex items-center gap-2 text-gray-400 text-sm">
+            <time>{date}</time>
+            <span>•</span>
+            <span>{readTime}</span>
           </div>
 
-          <div className="flex items-center justify-between text-sm text-gray-500">
-            <div className="flex items-center space-x-2">
-              <span>{author}</span>
-              <span>•</span>
-              <time>{date}</time>
+          <div className="space-y-2">
+            <h3 className="text-xl font-semibold text-white group-hover:text-purple-400 transition-colors duration-300">
+              {title}
+            </h3>
+            <p className="text-gray-400 line-clamp-2">{excerpt}</p>
+          </div>
+
+          <div className="space-y-2">
+            {pros[0] && (
+              <div className="flex items-center gap-2 text-gray-300">
+                <Check className="w-4 h-4 text-green-500" />
+                <span className="line-clamp-1">{pros[0]}</span>
+              </div>
+            )}
+            {cons[0] && (
+              <div className="flex items-center gap-2 text-gray-300">
+                <X className="w-4 h-4 text-red-500" />
+                <span className="line-clamp-1">{cons[0]}</span>
+              </div>
+            )}
+          </div>
+
+          <div className="flex items-center justify-between pt-4 border-t border-gray-800">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
+                <span className="text-white font-medium">{author[0]}</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-white font-medium">{author}</span>
+                <span className="text-sm text-gray-400">{authorTitle}</span>
+              </div>
             </div>
-            <span>{readTime}</span>
+            {price && (
+              <div className="flex items-center gap-4">
+                <span className="text-white font-bold">${price}</span>
+                <Button 
+                  variant="secondary"
+                  size="sm"
+                  className="whitespace-nowrap"
+                >
+                  Check Price
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </motion.article>
