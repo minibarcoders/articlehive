@@ -20,7 +20,7 @@ export const ArticleCard = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="group cursor-pointer rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden bg-[#F1F0FB] dark:bg-gradient-to-br dark:from-gray-800/90 dark:via-gray-800/80 dark:to-purple-900/20 border border-border/5"
+        className="group cursor-pointer rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden bg-[#F1F0FB] dark:bg-gray-800/90 border border-border/5"
       >
         <div className="relative overflow-hidden aspect-[16/9]">
           <img

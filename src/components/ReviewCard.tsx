@@ -41,7 +41,7 @@ export const ReviewCard = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="group cursor-pointer bg-[#F1F0FB] dark:bg-gradient-to-br dark:from-gray-800/90 dark:via-gray-800/80 dark:to-purple-900/20 rounded-xl overflow-hidden hover:ring-2 hover:ring-purple-500/50 transition-all duration-300"
+        className="group cursor-pointer bg-[#F1F0FB] dark:bg-gray-800/90 rounded-xl overflow-hidden hover:ring-2 hover:ring-purple-500/50 transition-all duration-300"
       >
         <div className="relative overflow-hidden aspect-[16/9]">
           <img
