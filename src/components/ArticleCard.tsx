@@ -1,26 +1,20 @@
 import { motion } from "framer-motion";
 import { CategoryPill } from "./CategoryPill";
 import { Link } from "react-router-dom";
-
-interface ArticleCardProps {
-  id: number;
-  title: string;
-  excerpt: string;
-  category: string;
-  imageUrl: string;
-  date: string;
-}
+import type { Article } from "./ArticleGrid";
 
 export const ArticleCard = ({
-  id,
   title,
   excerpt,
   category,
   imageUrl,
   date,
-}: ArticleCardProps) => {
+  author,
+  readTime,
+  href,
+}: Article) => {
   return (
-    <Link to={`/guides/${id}`}>
+    <Link to={href}>
       <motion.article
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -36,14 +30,21 @@ export const ArticleCard = ({
           <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent" />
         </div>
         <div className="p-6 space-y-4">
-          <CategoryPill name={category} />
+          <div className="flex items-center gap-4">
+            <CategoryPill name={category} />
+            <span className="text-sm text-gray-500">{readTime}</span>
+          </div>
           <div className="space-y-2">
             <h3 className="text-xl font-semibold leading-tight group-hover:text-purple-600 transition-colors">
               {title}
             </h3>
             <p className="text-gray-600 line-clamp-2">{excerpt}</p>
           </div>
-          <time className="block text-sm text-gray-500">{date}</time>
+          <div className="flex items-center gap-2 text-sm text-gray-500">
+            <span>{author}</span>
+            <span>•</span>
+            <time>{date}</time>
+          </div>
         </div>
       </motion.article>
     </Link>

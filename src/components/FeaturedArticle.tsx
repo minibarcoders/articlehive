@@ -2,25 +2,30 @@ import { motion } from "framer-motion";
 import { CategoryPill } from "./CategoryPill";
 import { Link } from "react-router-dom";
 
-interface FeaturedArticleProps {
+export interface FeaturedArticleProps {
   id: number;
   title: string;
   excerpt: string;
   category: string;
   imageUrl: string;
   date: string;
+  author: string;
+  readTime: string;
+  href: string;
 }
 
 export const FeaturedArticle = ({
-  id,
   title,
   excerpt,
   category,
   imageUrl,
   date,
+  author,
+  readTime,
+  href
 }: FeaturedArticleProps) => {
   return (
-    <Link to={`/guides/${id}`}>
+    <Link to={href}>
       <motion.article
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -36,14 +41,21 @@ export const FeaturedArticle = ({
           <div className="absolute inset-0 bg-gradient-to-t from-purple-900/80 to-transparent" />
         </div>
         <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-          <CategoryPill name={category} className="bg-white/20 text-white mb-4" />
+          <div className="flex items-center gap-4 mb-4">
+            <CategoryPill name={category} className="bg-white/20 text-white" />
+            <span className="text-sm text-purple-100">{readTime}</span>
+          </div>
           <h2 className="text-4xl font-bold mb-3 group-hover:text-purple-100 transition-colors">
             {title}
           </h2>
           <p className="text-lg text-purple-100 mb-3 line-clamp-2 max-w-3xl">
             {excerpt}
           </p>
-          <time className="text-sm text-purple-200">{date}</time>
+          <div className="flex items-center gap-2 text-sm text-purple-200">
+            <span>{author}</span>
+            <span>•</span>
+            <time>{date}</time>
+          </div>
         </div>
       </motion.article>
     </Link>
