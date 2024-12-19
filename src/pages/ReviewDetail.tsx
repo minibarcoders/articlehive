@@ -96,6 +96,7 @@ const ReviewDetail = () => {
                 content={review.content} 
                 imageUrl={review.image_url} 
                 tags={review.tags}
+                excerpt={review.excerpt}
               />
             </div>
             <div className={`lg:sticky lg:top-32 h-fit transition-opacity duration-300 ${showQuickTake ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
