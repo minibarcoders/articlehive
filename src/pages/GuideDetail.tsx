@@ -2,114 +2,48 @@ import { Header } from "@/components/Header";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import { CategoryPill } from "@/components/CategoryPill";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase/client";
 
-const guides = {
-  1: {
-    title: "Complete Guide to Home Office Setup",
-    content: `
-      Setting up the perfect home office is crucial for productivity and comfort. Here's a comprehensive guide to help you create an optimal workspace.
+const fetchGuide = async (id: string) => {
+  const { data, error } = await supabase
+    .from("guides")
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
 
-      ## Essential Equipment
-      - A height-adjustable desk for ergonomic comfort
-      - An ergonomic chair with proper lumbar support
-      - External monitor(s) for expanded screen real estate
-      - Quality webcam and microphone for virtual meetings
-
-      ## Lighting Considerations
-      Natural light is ideal for your workspace. Position your desk near a window, but avoid direct glare on your screens. Supplement with adjustable task lighting for darker hours.
-
-      ## Ergonomic Setup
-      - Monitor at arm's length, top of screen at eye level
-      - Keyboard and mouse at elbow height
-      - Feet flat on floor or footrest
-      - Chair supporting lower back
-
-      ## Technology Requirements
-      - Reliable high-speed internet connection
-      - UPS for power backup
-      - Proper cable management system
-      - Adequate power outlets and surge protection
-    `,
-    category: "Productivity",
-    imageUrl: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
-    date: "March 16, 2024",
-    author: "Alex Chen",
-    readTime: "15 min read"
-  },
-  2: {
-    title: "Mastering iPhone Photography",
-    content: `
-      Your iPhone is a powerful camera capable of stunning photography. Here's how to make the most of it.
-
-      ## Basic Camera Settings
-      - HDR: Enable Smart HDR for better dynamic range
-      - Grid: Turn on the grid for better composition
-      - Formats: Choose between High Efficiency and Most Compatible
-
-      ## Composition Techniques
-      - Rule of Thirds: Place key elements along grid lines
-      - Leading Lines: Use natural lines to guide viewer's eye
-      - Symmetry: Create balanced, eye-catching images
-      - Framing: Use natural frames to highlight subjects
-
-      ## Advanced Features
-      - Portrait Mode: Create professional-looking depth effects
-      - Night Mode: Capture clear photos in low light
-      - ProRAW: Maximum editing flexibility (iPhone 12 Pro and newer)
-
-      ## Post-Processing
-      Learn to use the built-in editing tools for:
-      - Exposure adjustment
-      - Color correction
-      - Cropping and straightening
-      - Selective adjustments
-    `,
-    category: "Photography",
-    imageUrl: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
-    date: "March 15, 2024",
-    author: "Sarah Wong",
-    readTime: "12 min read"
-  },
-  3: {
-    title: "Cybersecurity Essentials",
-    content: `
-      Protect your digital life with these essential cybersecurity practices.
-
-      ## Password Management
-      - Use unique, complex passwords for each account
-      - Implement a password manager
-      - Enable two-factor authentication wherever possible
-
-      ## Network Security
-      - Secure your home Wi-Fi with WPA3 encryption
-      - Use a VPN when on public networks
-      - Regularly update router firmware
-
-      ## Device Protection
-      - Keep software and operating systems updated
-      - Install reputable antivirus software
-      - Enable device encryption
-      - Regular data backups
-
-      ## Safe Browsing Habits
-      - Verify website security (HTTPS)
-      - Be cautious with downloads
-      - Recognize phishing attempts
-      - Use private browsing when necessary
-    `,
-    category: "Security",
-    imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
-    date: "March 14, 2024",
-    author: "Michael Torres",
-    readTime: "10 min read"
-  }
-} as const;
+  if (error) throw error;
+  return data;
+};
 
 const GuideDetail = () => {
   const { id } = useParams();
-  const guide = id ? guides[Number(id) as keyof typeof guides] : null;
+  const { data: guide, isLoading, error } = useQuery({
+    queryKey: ["guide", id],
+    queryFn: () => fetchGuide(id!),
+    enabled: !!id,
+  });
 
-  if (!guide) {
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
+        <Header />
+        <main className="container mx-auto px-4 pt-24 pb-12">
+          <div className="animate-pulse space-y-8">
+            <div className="h-64 bg-gray-200 rounded-xl" />
+            <div className="h-8 bg-gray-200 w-1/3 rounded" />
+            <div className="space-y-4">
+              <div className="h-4 bg-gray-200 w-full rounded" />
+              <div className="h-4 bg-gray-200 w-5/6 rounded" />
+              <div className="h-4 bg-gray-200 w-4/6 rounded" />
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  if (error || !guide) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
         <Header />
@@ -141,9 +75,13 @@ const GuideDetail = () => {
               <div className="flex items-center space-x-4 text-gray-600">
                 <span>{guide.author}</span>
                 <span>•</span>
-                <time>{guide.date}</time>
+                <time>{new Date(guide.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}</time>
                 <span>•</span>
-                <span>{guide.readTime}</span>
+                <span>{guide.read_time}</span>
               </div>
             </div>
 
@@ -154,7 +92,7 @@ const GuideDetail = () => {
               className="relative rounded-xl overflow-hidden mb-8"
             >
               <img
-                src={guide.imageUrl}
+                src={guide.image_url || "https://via.placeholder.com/1200x600"}
                 alt={guide.title}
                 className="w-full aspect-video object-cover"
               />
@@ -168,7 +106,6 @@ const GuideDetail = () => {
               className="prose prose-lg max-w-none prose-headings:text-purple-600 prose-a:text-blue-600"
             >
               {guide.content.split('\n\n').map((paragraph, index) => {
-                // Handle headings
                 if (paragraph.startsWith('##')) {
                   return (
                     <motion.h2
@@ -183,7 +120,6 @@ const GuideDetail = () => {
                   );
                 }
                 
-                // Handle bullet points
                 if (paragraph.includes('- ')) {
                   return (
                     <motion.ul
@@ -209,7 +145,6 @@ const GuideDetail = () => {
                   );
                 }
 
-                // Handle regular paragraphs
                 return (
                   <motion.p
                     key={index}
