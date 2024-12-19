@@ -18,19 +18,21 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="dark">
       <TooltipProvider>
-        <BrowserRouter>
-          <Toaster />
-          <Sonner />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/reviews/:id" element={<ReviewDetail />} />
-            <Route path="/guides" element={<Guides />} />
-            <Route path="/guides/:id" element={<GuideDetail />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/admin" element={<Admin />} />
-          </Routes>
-        </BrowserRouter>
+        <div className="min-h-screen bg-background transition-colors duration-300">
+          <BrowserRouter>
+            <Toaster />
+            <Sonner />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/reviews/:id" element={<ReviewDetail />} />
+              <Route path="/guides" element={<Guides />} />
+              <Route path="/guides/:id" element={<GuideDetail />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/admin" element={<Admin />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>
