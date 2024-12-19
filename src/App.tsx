@@ -9,6 +9,7 @@ import ReviewDetail from "./pages/ReviewDetail";
 import Guides from "./pages/Guides";
 import GuideDetail from "./pages/GuideDetail";
 import About from "./pages/About";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/guides" element={<Guides />} />
           <Route path="/guides/:id" element={<GuideDetail />} />
           <Route path="/about" element={<About />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
