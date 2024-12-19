@@ -167,25 +167,61 @@ const GuideDetail = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="prose prose-lg max-w-none prose-headings:text-purple-600 prose-a:text-blue-600"
             >
-              {guide.content.split('\n\n').map((paragraph, index) => (
-                <div key={index}>
-                  {paragraph.startsWith('##') ? (
-                    <h2 className="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              {guide.content.split('\n\n').map((paragraph, index) => {
+                // Handle headings
+                if (paragraph.startsWith('##')) {
+                  return (
+                    <motion.h2
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.4 + index * 0.1 }}
+                      className="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent"
+                    >
                       {paragraph.replace('##', '').trim()}
-                    </h2>
-                  ) : paragraph.includes('- ') ? (
-                    <ul className="list-disc pl-6 my-4 marker:text-purple-400">
+                    </motion.h2>
+                  );
+                }
+                
+                // Handle bullet points
+                if (paragraph.includes('- ')) {
+                  return (
+                    <motion.ul
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.4 + index * 0.1 }}
+                      className="list-none space-y-3 my-6"
+                    >
                       {paragraph.split('\n').map((item, i) => (
-                        <li key={i} className="my-2">
-                          {item.replace('- ', '')}
-                        </li>
+                        <motion.li
+                          key={i}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.5 + i * 0.1 }}
+                          className="flex items-start space-x-3"
+                        >
+                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-purple-500 mt-2.5" />
+                          <span className="text-gray-700">{item.replace('- ', '')}</span>
+                        </motion.li>
                       ))}
-                    </ul>
-                  ) : (
-                    <p className="my-4 text-gray-700">{paragraph}</p>
-                  )}
-                </div>
-              ))}
+                    </motion.ul>
+                  );
+                }
+
+                // Handle regular paragraphs
+                return (
+                  <motion.p
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 + index * 0.1 }}
+                    className="my-6 text-gray-700 leading-relaxed"
+                  >
+                    {paragraph}
+                  </motion.p>
+                );
+              })}
             </motion.div>
           </motion.div>
         </article>
