@@ -28,7 +28,7 @@ const ReviewDetail = () => {
     return (
       <div className="min-h-screen bg-white">
         <Header />
-        <main className="container mx-auto px-4 pt-24 pb-12">
+        <main className="pt-20">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-purple-600">Loading...</h1>
           </div>
@@ -41,7 +41,7 @@ const ReviewDetail = () => {
     return (
       <div className="min-h-screen bg-white">
         <Header />
-        <main className="container mx-auto px-4 pt-24 pb-12">
+        <main className="pt-20">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-purple-600">
               Review not found
@@ -55,7 +55,7 @@ const ReviewDetail = () => {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <article>
+      <article className="pt-20">
         <ReviewHero
           title={review.title}
           excerpt={review.excerpt}
