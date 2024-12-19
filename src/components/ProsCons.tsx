@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 
 interface ProsConsProps {
-  pros: string[];
-  cons: string[];
+  pros: readonly string[];
+  cons: readonly string[];
 }
 
 export const ProsCons = ({ pros, cons }: ProsConsProps) => {
