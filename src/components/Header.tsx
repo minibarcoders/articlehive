@@ -30,7 +30,7 @@ export const Header = () => {
             
             <nav className="hidden md:flex items-center space-x-2">
               {[
-                { path: "/", label: "Latest" },
+                { path: "/", label: "Home" },
                 { path: "/reviews", label: "Reviews" },
                 { path: "/guides", label: "Guides" },
                 { path: "/about", label: "About" },
