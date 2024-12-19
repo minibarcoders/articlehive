@@ -24,13 +24,13 @@ export const ContentForm = ({ type, initialData, onClose }: ContentFormProps) =>
   const [author, setAuthor] = useState(initialData?.author || "");
   const [readTime, setReadTime] = useState(initialData?.read_time || "");
   const [rating, setRating] = useState(
-    type === "review" && "rating" in initialData ? initialData.rating : 5
+    type === "review" && initialData && "rating" in initialData ? initialData.rating : 5
   );
   const [pros, setPros] = useState<string[]>(
-    type === "review" && "pros" in initialData ? initialData.pros : [""]
+    type === "review" && initialData && "pros" in initialData ? initialData.pros : [""]
   );
   const [cons, setCons] = useState<string[]>(
-    type === "review" && "cons" in initialData ? initialData.cons : [""]
+    type === "review" && initialData && "cons" in initialData ? initialData.cons : [""]
   );
 
   const handleSubmit = async (e: React.FormEvent) => {
