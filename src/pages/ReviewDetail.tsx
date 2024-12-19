@@ -45,11 +45,13 @@ const reviews = {
       "Port selection might not satisfy all users"
     ]
   }
-};
+} as const;
+
+type ReviewId = keyof typeof reviews;
 
 const ReviewDetail = () => {
   const { id } = useParams();
-  const review = reviews[id as keyof typeof reviews];
+  const review = id ? reviews[Number(id) as ReviewId] : null;
 
   if (!review) {
     return (
