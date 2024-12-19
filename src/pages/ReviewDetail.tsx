@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase/client";
 import { ReviewHero } from "@/components/review/ReviewHero";
 import { ReviewContent } from "@/components/review/ReviewContent";
 import { ReviewQuickTake } from "@/components/review/ReviewQuickTake";
+import { useEffect, useState } from "react";
 
 const fetchReview = async (id: string) => {
   const { data, error } = await supabase
@@ -19,11 +20,27 @@ const fetchReview = async (id: string) => {
 
 const ReviewDetail = () => {
   const { id } = useParams();
+  const [showQuickTake, setShowQuickTake] = useState(true);
   const { data: review, isLoading, error } = useQuery({
     queryKey: ["review", id],
     queryFn: () => fetchReview(id!),
     enabled: !!id,
   });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const contentStart = document.getElementById('review-content')?.offsetTop ?? 0;
+      const threshold = contentStart + window.innerHeight;
+      
+      setShowQuickTake(scrollPosition < threshold);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   if (isLoading) {
     return (
@@ -53,9 +70,8 @@ const ReviewDetail = () => {
     );
   }
 
-  // Mock ratings for demonstration - in production these would come from the review data
   const ratings = {
-    overall: Math.round(review.rating * 2), // Convert 5-star to 10-point scale
+    overall: Math.round(review.rating * 2),
     design: 9,
     features: 8,
     performance: 10,
@@ -75,14 +91,14 @@ const ReviewDetail = () => {
         />
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
+            <div id="review-content" className="lg:col-span-2">
               <ReviewContent 
                 content={review.content} 
                 imageUrl={review.image_url} 
                 tags={review.tags}
               />
             </div>
-            <div className="lg:sticky lg:top-24 h-fit">
+            <div className={`lg:sticky lg:top-24 h-fit transition-opacity duration-300 ${showQuickTake ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
               <ReviewQuickTake
                 title={review.title}
                 excerpt={review.excerpt}
