@@ -45,11 +45,11 @@ const ReviewDetail = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-[#222222]">
         <Header />
         <main className="pt-20">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-purple-600">Loading...</h1>
+            <h1 className="text-2xl font-bold text-white">Loading...</h1>
           </div>
         </main>
       </div>
@@ -58,11 +58,11 @@ const ReviewDetail = () => {
 
   if (error || !review) {
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-[#222222]">
         <Header />
         <main className="pt-20">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-purple-600">
+            <h1 className="text-2xl font-bold text-white">
               Review not found
             </h1>
           </div>
@@ -72,7 +72,7 @@ const ReviewDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#222222]">
       <Header />
       <article className="pt-20">
         <ReviewHero

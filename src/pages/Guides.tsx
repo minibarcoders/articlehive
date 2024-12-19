@@ -25,17 +25,17 @@ const Guides = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-[#222222]">
         <Header />
         <main className="container mx-auto px-4 pt-24 pb-12">
           <div className="animate-pulse space-y-8">
-            <div className="h-8 bg-gray-200 rounded w-1/4"></div>
+            <div className="h-8 bg-[#2A2A2A] rounded w-1/4"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3].map((n) => (
-                <div key={n} className="bg-white rounded-lg shadow-md p-6 space-y-4">
-                  <div className="h-48 bg-gray-200 rounded"></div>
-                  <div className="h-6 bg-gray-200 rounded w-3/4"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div key={n} className="bg-[#2A2A2A] rounded-lg shadow-md p-6 space-y-4">
+                  <div className="h-48 bg-[#333333] rounded"></div>
+                  <div className="h-6 bg-[#333333] rounded w-3/4"></div>
+                  <div className="h-4 bg-[#333333] rounded w-1/2"></div>
                 </div>
               ))}
             </div>
@@ -51,7 +51,7 @@ const Guides = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#222222]">
       <Header />
       <main className="container mx-auto px-4 pt-24 pb-12">
         <motion.div
@@ -60,11 +60,19 @@ const Guides = () => {
           transition={{ duration: 0.5 }}
           className="space-y-8"
         >
+          <div className="flex flex-col space-y-4">
+            <h1 className="text-4xl font-bold text-white">Tech Guides</h1>
+            <p className="text-lg text-gray-300">
+              Comprehensive guides and tutorials to help you make the most of your tech
+            </p>
+          </div>
+
           <CategoryFilter
             categories={categories}
             selectedCategory={selectedCategory}
             onSelectCategory={setSelectedCategory}
           />
+          
           <ArticleGrid
             articles={filteredGuides?.map((guide) => ({
               id: guide.id,

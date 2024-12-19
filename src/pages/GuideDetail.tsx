@@ -26,16 +26,16 @@ const GuideDetail = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
+      <div className="min-h-screen bg-[#222222]">
         <Header />
         <main className="container mx-auto px-4 pt-24 pb-12">
           <div className="animate-pulse space-y-8">
-            <div className="h-64 bg-gray-200 rounded-xl" />
-            <div className="h-8 bg-gray-200 w-1/3 rounded" />
+            <div className="h-64 bg-[#2A2A2A] rounded-xl" />
+            <div className="h-8 bg-[#2A2A2A] w-1/3 rounded" />
             <div className="space-y-4">
-              <div className="h-4 bg-gray-200 w-full rounded" />
-              <div className="h-4 bg-gray-200 w-5/6 rounded" />
-              <div className="h-4 bg-gray-200 w-4/6 rounded" />
+              <div className="h-4 bg-[#2A2A2A] w-full rounded" />
+              <div className="h-4 bg-[#2A2A2A] w-5/6 rounded" />
+              <div className="h-4 bg-[#2A2A2A] w-4/6 rounded" />
             </div>
           </div>
         </main>
@@ -45,11 +45,11 @@ const GuideDetail = () => {
 
   if (error || !guide) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
+      <div className="min-h-screen bg-[#222222]">
         <Header />
         <main className="container mx-auto px-4 pt-24 pb-12">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-purple-600">Guide not found</h1>
+            <h1 className="text-2xl font-bold text-white">Guide not found</h1>
           </div>
         </main>
       </div>
@@ -57,7 +57,7 @@ const GuideDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
+    <div className="min-h-screen bg-[#222222]">
       <Header />
       <main className="container mx-auto px-4 pt-24 pb-12">
         <article className="max-w-4xl mx-auto">
@@ -65,14 +65,14 @@ const GuideDetail = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-2xl shadow-lg p-8 mb-8"
+            className="bg-[#2A2A2A] rounded-2xl shadow-lg p-8 mb-8"
           >
             <div className="space-y-4 mb-8">
               <CategoryPill name={guide.category} />
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold text-white">
                 {guide.title}
               </h1>
-              <div className="flex items-center space-x-4 text-gray-600">
+              <div className="flex items-center space-x-4 text-gray-300">
                 <span>{guide.author}</span>
                 <span>•</span>
                 <time>{new Date(guide.date).toLocaleDateString("en-US", {
@@ -103,7 +103,7 @@ const GuideDetail = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="prose prose-lg max-w-none prose-headings:text-purple-600 prose-a:text-blue-600"
+              className="prose prose-invert prose-lg max-w-none"
             >
               {guide.content.split('\n\n').map((paragraph, index) => {
                 if (paragraph.startsWith('##')) {
@@ -113,7 +113,7 @@ const GuideDetail = () => {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.4 + index * 0.1 }}
-                      className="text-2xl font-bold mt-8 mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent"
+                      className="text-2xl font-bold mt-8 mb-4 text-white"
                     >
                       {paragraph.replace('##', '').trim()}
                     </motion.h2>
@@ -138,7 +138,7 @@ const GuideDetail = () => {
                           className="flex items-start space-x-3"
                         >
                           <span className="inline-block w-1.5 h-1.5 rounded-full bg-purple-500 mt-2.5" />
-                          <span className="text-gray-700">{item.replace('- ', '')}</span>
+                          <span className="text-gray-300">{item.replace('- ', '')}</span>
                         </motion.li>
                       ))}
                     </motion.ul>
@@ -151,7 +151,7 @@ const GuideDetail = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 + index * 0.1 }}
-                    className="my-6 text-gray-700 leading-relaxed"
+                    className="my-6 text-gray-300 leading-relaxed"
                   >
                     {paragraph}
                   </motion.p>

@@ -35,10 +35,10 @@ const Reviews = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-[#222222]">
         <Header />
         <main className="container mx-auto px-4 pt-24 pb-12">
-          <div>Loading...</div>
+          <div className="text-gray-300">Loading...</div>
         </main>
       </div>
     );
@@ -46,17 +46,17 @@ const Reviews = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-[#222222]">
         <Header />
         <main className="container mx-auto px-4 pt-24 pb-12">
-          <div>Error loading reviews</div>
+          <div className="text-gray-300">Error loading reviews</div>
         </main>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#222222]">
       <Header />
       <main className="container mx-auto px-4 pt-24 pb-12">
         <motion.div
@@ -66,8 +66,8 @@ const Reviews = () => {
           className="space-y-8"
         >
           <div className="flex flex-col space-y-4">
-            <h1 className="text-4xl font-bold text-gray-900">Tech Reviews</h1>
-            <p className="text-lg text-gray-600">
+            <h1 className="text-4xl font-bold text-white">Tech Reviews</h1>
+            <p className="text-lg text-gray-300">
               In-depth analysis and hands-on reviews of the latest tech products
             </p>
           </div>
