@@ -20,7 +20,7 @@ export const ArticleCard = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="group cursor-pointer bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+        className="group cursor-pointer bg-card rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
       >
         <div className="relative overflow-hidden aspect-[16/9]">
           <img
@@ -33,15 +33,15 @@ export const ArticleCard = ({
         <div className="p-6 space-y-4">
           <div className="flex items-center gap-4">
             <CategoryPill name={category} />
-            <span className="text-sm text-gray-500">{readTime}</span>
+            <span className="text-sm text-muted-foreground">{readTime}</span>
           </div>
           <div className="space-y-2">
-            <h3 className="text-xl font-semibold leading-tight group-hover:text-purple-600 transition-colors duration-300">
+            <h3 className="text-xl font-semibold leading-tight text-foreground group-hover:text-purple-600 transition-colors duration-300">
               {title}
             </h3>
-            <p className="text-gray-600 line-clamp-2">{excerpt}</p>
+            <p className="text-foreground dark:text-gray-300 line-clamp-2">{excerpt}</p>
           </div>
-          <div className="flex items-center gap-2 text-sm text-gray-500">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span>{author}</span>
             <span>•</span>
             <time>{date}</time>

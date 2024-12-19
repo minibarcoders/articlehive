@@ -36,10 +36,10 @@ const Index = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#222222]">
+      <div className="min-h-screen bg-background">
         <Header />
         <main className="container mx-auto px-4 pt-24 pb-12">
-          <div className="text-gray-300">Loading...</div>
+          <div className="text-foreground">Loading...</div>
         </main>
       </div>
     );
@@ -47,10 +47,10 @@ const Index = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#222222]">
+      <div className="min-h-screen bg-background">
         <Header />
         <main className="container mx-auto px-4 pt-24 pb-12">
-          <div className="text-gray-300">Error loading content</div>
+          <div className="text-foreground">Error loading content</div>
         </main>
       </div>
     );
@@ -63,28 +63,28 @@ const Index = () => {
   ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
-    <div className="min-h-screen bg-[#222222]">
+    <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Hero Section - Darkest layer */}
-      <section className="relative bg-[#222222] pt-32 pb-24">
+      {/* Hero Section */}
+      <section className="relative bg-background pt-32 pb-24">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-6xl font-bold mb-6 text-white">
+          <h1 className="text-6xl font-bold mb-6 text-foreground">
             Your Trusted Source
             <br />
             for Tech Reviews
           </h1>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+          <p className="text-xl text-foreground dark:text-gray-300 mb-12 max-w-2xl mx-auto">
             In-depth reviews, expert analysis, and the latest insights on technology products that matter to you.
           </p>
           <div className="flex gap-4 justify-center">
             <Link to="/reviews">
-              <Button size="lg" className="bg-white text-[#222222] hover:bg-gray-100">
+              <Button size="lg">
                 Browse Reviews
               </Button>
             </Link>
             <Link to="/guides">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button size="lg" variant="outline">
                 Read Our Guides
               </Button>
             </Link>
@@ -92,15 +92,15 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Latest Reviews Section - Middle layer */}
-      <section className="relative bg-[#2A2A2A] py-24">
+      {/* Latest Reviews Section */}
+      <section className="relative bg-accent py-24">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-white mb-2">Latest Reviews</h2>
-              <p className="text-gray-400">Our most recent in-depth tech reviews</p>
+              <h2 className="text-3xl font-bold text-foreground mb-2">Latest Reviews</h2>
+              <p className="text-foreground dark:text-gray-300">Our most recent in-depth tech reviews</p>
             </div>
-            <Link to="/reviews" className="text-white hover:text-gray-300 font-medium">
+            <Link to="/reviews" className="text-foreground hover:text-foreground/80 font-medium">
               View all reviews →
             </Link>
           </div>
@@ -125,8 +125,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Other Articles Section - Lightest layer */}
-      <section className="relative bg-[#333333] py-24">
+      {/* Other Articles Section */}
+      <section className="relative bg-background py-24">
         <div className="container mx-auto px-4">
           <div className="mt-12">
             <ArticleGrid
