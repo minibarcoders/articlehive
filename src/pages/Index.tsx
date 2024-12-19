@@ -36,10 +36,10 @@ const Index = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
+      <div className="min-h-screen bg-[#222222]">
         <Header />
         <main className="container mx-auto px-4 pt-24 pb-12">
-          <div>Loading...</div>
+          <div className="text-gray-300">Loading...</div>
         </main>
       </div>
     );
@@ -47,10 +47,10 @@ const Index = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
+      <div className="min-h-screen bg-[#222222]">
         <Header />
         <main className="container mx-auto px-4 pt-24 pb-12">
-          <div>Error loading content</div>
+          <div className="text-gray-300">Error loading content</div>
         </main>
       </div>
     );
@@ -63,78 +63,90 @@ const Index = () => {
   ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white">
+    <div className="min-h-screen bg-[#222222]">
       <Header />
       
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 pt-32 pb-24 text-center">
-        <h1 className="text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
-          Your Trusted Source
-          <br />
-          for Tech Reviews
-        </h1>
-        <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-          In-depth reviews, expert analysis, and the latest insights on technology products that matter to you.
-        </p>
-        <div className="flex gap-4 justify-center">
-          <Link to="/reviews">
-            <Button size="lg" className="bg-purple-600 hover:bg-purple-700">
-              Browse Reviews
-            </Button>
-          </Link>
-          <Link to="/guides">
-            <Button size="lg" variant="outline" className="border-purple-600 text-purple-600 hover:bg-purple-50">
-              Read Our Guides
-            </Button>
-          </Link>
+      {/* Hero Section - Darkest layer */}
+      <section className="relative bg-[#222222] pt-32 pb-24">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-6xl font-bold mb-6 text-white">
+            Your Trusted Source
+            <br />
+            for Tech Reviews
+          </h1>
+          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+            In-depth reviews, expert analysis, and the latest insights on technology products that matter to you.
+          </p>
+          <div className="flex gap-4 justify-center">
+            <Link to="/reviews">
+              <Button size="lg" className="bg-white text-[#222222] hover:bg-gray-100">
+                Browse Reviews
+              </Button>
+            </Link>
+            <Link to="/guides">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                Read Our Guides
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Latest Reviews Section */}
-      <section className="container mx-auto px-4 pb-24">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold">Latest Reviews</h2>
-          <Link to="/reviews" className="text-purple-600 hover:text-purple-700 font-medium">
-            View all reviews →
-          </Link>
-        </div>
-        
-        {featuredArticle && (
-          <FeaturedArticle
-            id={featuredArticle.id}
-            title={featuredArticle.title}
-            excerpt={featuredArticle.excerpt}
-            imageUrl={featuredArticle.image_url || "/placeholder.svg"}
-            category={featuredArticle.category}
-            author={featuredArticle.author}
-            date={new Date(featuredArticle.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-            readTime={featuredArticle.read_time}
-            href={`/${featuredArticle.rating ? 'reviews' : 'guides'}/${featuredArticle.id}`}
-          />
-        )}
-
-        <div className="mt-12">
-          <ArticleGrid
-            articles={otherArticles.map(article => ({
-              id: article.id,
-              title: article.title,
-              excerpt: article.excerpt,
-              imageUrl: article.image_url || "/placeholder.svg",
-              category: article.category,
-              author: article.author,
-              date: new Date(article.date).toLocaleDateString("en-US", {
+      {/* Latest Reviews Section - Middle layer */}
+      <section className="relative bg-[#2A2A2A] py-24">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center mb-12">
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-2">Latest Reviews</h2>
+              <p className="text-gray-400">Our most recent in-depth tech reviews</p>
+            </div>
+            <Link to="/reviews" className="text-white hover:text-gray-300 font-medium">
+              View all reviews →
+            </Link>
+          </div>
+          
+          {featuredArticle && (
+            <FeaturedArticle
+              id={featuredArticle.id}
+              title={featuredArticle.title}
+              excerpt={featuredArticle.excerpt}
+              imageUrl={featuredArticle.image_url || "/placeholder.svg"}
+              category={featuredArticle.category}
+              author={featuredArticle.author}
+              date={new Date(featuredArticle.date).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
-              }),
-              readTime: article.read_time,
-              href: `/${article.rating ? 'reviews' : 'guides'}/${article.id}`
-            }))}
-          />
+              })}
+              readTime={featuredArticle.read_time}
+              href={`/${featuredArticle.rating ? 'reviews' : 'guides'}/${featuredArticle.id}`}
+            />
+          )}
+        </div>
+      </section>
+
+      {/* Other Articles Section - Lightest layer */}
+      <section className="relative bg-[#333333] py-24">
+        <div className="container mx-auto px-4">
+          <div className="mt-12">
+            <ArticleGrid
+              articles={otherArticles.map(article => ({
+                id: article.id,
+                title: article.title,
+                excerpt: article.excerpt,
+                imageUrl: article.image_url || "/placeholder.svg",
+                category: article.category,
+                author: article.author,
+                date: new Date(article.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                }),
+                readTime: article.read_time,
+                href: `/${article.rating ? 'reviews' : 'guides'}/${article.id}`
+              }))}
+            />
+          </div>
         </div>
       </section>
     </div>

@@ -13,7 +13,7 @@ export const Header = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 bg-gradient-to-r from-purple-50 to-blue-50 backdrop-blur-md z-50 border-b border-gray-200/50 shadow-sm"
+      className="fixed top-0 left-0 right-0 bg-[#222222]/90 backdrop-blur-md z-50 border-b border-gray-800"
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
@@ -37,8 +37,8 @@ export const Header = () => {
                 to={path}
                 className={`px-6 py-2.5 rounded-full text-base font-medium transition-all duration-200 ${
                   isActiveLink(path)
-                    ? "bg-white text-purple-600 shadow-sm"
-                    : "text-gray-600 hover:text-purple-600 hover:bg-white/50"
+                    ? "bg-white text-[#222222]"
+                    : "text-gray-300 hover:text-white hover:bg-white/10"
                 }`}
               >
                 {label}
@@ -47,7 +47,7 @@ export const Header = () => {
           </nav>
 
           <div className="md:hidden">
-            <button className="p-2 rounded-md text-gray-600 hover:text-purple-600 hover:bg-white/50 transition-colors">
+            <button className="p-2 rounded-md text-gray-300 hover:text-white hover:bg-white/10 transition-colors">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
