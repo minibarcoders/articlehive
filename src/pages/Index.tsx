@@ -27,16 +27,17 @@ const Index = () => {
         .order("date", { ascending: false })
         .limit(5);
 
-      const { data: popularReviews, error: popularReviewsError } = await supabase
-        .from("reviews")
+      const { data: popularGuide, error: popularGuideError } = await supabase
+        .from("guides")
         .select("*")
-        .order("rating", { ascending: false })
-        .limit(5);
+        .order("date", { ascending: false })
+        .limit(1)
+        .single();
 
       if (guidesError) throw guidesError;
       if (reviewsError) throw reviewsError;
       if (postsError) throw postsError;
-      if (popularReviewsError) throw popularReviewsError;
+      if (popularGuideError) throw popularGuideError;
 
       // Create feed items from guides, reviews, and posts
       const feedItems = [
@@ -89,7 +90,8 @@ const Index = () => {
         guides: guides || [],
         reviews: reviews || [],
         feedItems,
-        popularItems: popularReviews || [],
+        popularItems: [],
+        popularGuide,
       };
     },
   });
@@ -116,13 +118,16 @@ const Index = () => {
     );
   }
 
-  const featuredArticle = data?.guides[0] || data?.reviews[0];
+  const featuredArticle = data?.reviews[0];
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <Hero />
-      <FeaturedSection featuredArticle={featuredArticle} />
+      <FeaturedSection 
+        featuredArticle={featuredArticle} 
+        popularGuide={data?.popularGuide}
+      />
       <ContentSection 
         feedItems={data?.feedItems || []} 
         popularItems={data?.popularItems || []}
