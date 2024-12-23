@@ -12,10 +12,10 @@ export const ContentSection = ({ feedItems, popularItems }: ContentSectionProps)
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div>
-            <div className="flex justify-between items-center mb-8">
+            <div className="flex justify-between items-center mb-12">
               <div>
-                <h2 className="text-2xl font-bold text-foreground mb-2">Latest Updates</h2>
-                <p className="text-foreground/90 dark:text-gray-300">Stay up to date with our latest content</p>
+                <h2 className="text-4xl font-bold text-foreground mb-4">Latest Updates</h2>
+                <p className="text-xl text-foreground/90 dark:text-gray-300">Stay up to date with our latest content</p>
               </div>
             </div>
             
