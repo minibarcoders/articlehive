@@ -11,66 +11,68 @@ export const FeaturedSection = ({ featuredArticle, popularGuide }: FeaturedSecti
 
   return (
     <section className="relative bg-accent py-24">
-      <div className="container mx-auto px-4 space-y-24">
-        {featuredArticle && (
-          <div>
-            <div className="flex justify-between items-center mb-12">
-              <div>
-                <h2 className="text-3xl font-bold text-foreground mb-2">Featured Reviews</h2>
-                <p className="text-foreground dark:text-gray-300">Our most recent in-depth tech reviews</p>
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {featuredArticle && (
+            <div>
+              <div className="flex justify-between items-center mb-12">
+                <div>
+                  <h2 className="text-3xl font-bold text-foreground mb-2">Featured Reviews</h2>
+                  <p className="text-foreground dark:text-gray-300">Our most recent in-depth tech reviews</p>
+                </div>
+                <Link to="/reviews" className="text-foreground hover:text-foreground/80 font-medium">
+                  View all reviews →
+                </Link>
               </div>
-              <Link to="/reviews" className="text-foreground hover:text-foreground/80 font-medium">
-                View all reviews →
-              </Link>
+              
+              <FeaturedArticle
+                id={featuredArticle.id}
+                title={featuredArticle.title}
+                excerpt={featuredArticle.excerpt}
+                imageUrl={featuredArticle.image_url || "/placeholder.svg"}
+                category={featuredArticle.category}
+                author={featuredArticle.author}
+                date={new Date(featuredArticle.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+                readTime={featuredArticle.read_time}
+                href={`/reviews/${featuredArticle.id}`}
+              />
             </div>
-            
-            <FeaturedArticle
-              id={featuredArticle.id}
-              title={featuredArticle.title}
-              excerpt={featuredArticle.excerpt}
-              imageUrl={featuredArticle.image_url || "/placeholder.svg"}
-              category={featuredArticle.category}
-              author={featuredArticle.author}
-              date={new Date(featuredArticle.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-              readTime={featuredArticle.read_time}
-              href={`/reviews/${featuredArticle.id}`}
-            />
-          </div>
-        )}
+          )}
 
-        {popularGuide && (
-          <div>
-            <div className="flex justify-between items-center mb-12">
-              <div>
-                <h2 className="text-3xl font-bold text-foreground mb-2">Most Read Guides</h2>
-                <p className="text-foreground dark:text-gray-300">Popular tech guides and tutorials</p>
+          {popularGuide && (
+            <div>
+              <div className="flex justify-between items-center mb-12">
+                <div>
+                  <h2 className="text-3xl font-bold text-foreground mb-2">Most Read Guides</h2>
+                  <p className="text-foreground dark:text-gray-300">Popular tech guides and tutorials</p>
+                </div>
+                <Link to="/guides" className="text-foreground hover:text-foreground/80 font-medium">
+                  View all guides →
+                </Link>
               </div>
-              <Link to="/guides" className="text-foreground hover:text-foreground/80 font-medium">
-                View all guides →
-              </Link>
+              
+              <FeaturedArticle
+                id={popularGuide.id}
+                title={popularGuide.title}
+                excerpt={popularGuide.excerpt}
+                imageUrl={popularGuide.image_url || "/placeholder.svg"}
+                category={popularGuide.category}
+                author={popularGuide.author}
+                date={new Date(popularGuide.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+                readTime={popularGuide.read_time}
+                href={`/guides/${popularGuide.id}`}
+              />
             </div>
-            
-            <FeaturedArticle
-              id={popularGuide.id}
-              title={popularGuide.title}
-              excerpt={popularGuide.excerpt}
-              imageUrl={popularGuide.image_url || "/placeholder.svg"}
-              category={popularGuide.category}
-              author={popularGuide.author}
-              date={new Date(popularGuide.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-              readTime={popularGuide.read_time}
-              href={`/guides/${popularGuide.id}`}
-            />
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </section>
   );
