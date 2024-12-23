@@ -10,8 +10,7 @@ export const ContentSection = ({ feedItems, popularItems }: ContentSectionProps)
   return (
     <section className="relative bg-background py-24">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1">
-          {/* Main Feed Column */}
+        <div className="max-w-4xl mx-auto">
           <div>
             <div className="flex justify-between items-center mb-8">
               <div>
