@@ -36,7 +36,7 @@ export const ArticleCard = ({
             <span className="text-sm text-[#403E43] dark:text-gray-300">{readTime}</span>
           </div>
           <div className="space-y-2">
-            <h3 className="text-xl font-semibold leading-tight text-[#222222] group-hover:text-purple-600 dark:text-gray-100 dark:group-hover:text-purple-400 transition-colors duration-300">
+            <h3 className="text-xl font-semibold leading-tight text-[#222222] group-hover:text-sky-600 dark:text-gray-100 dark:group-hover:text-sky-400 transition-colors duration-300">
               {title}
             </h3>
             <p className="text-[#333333] dark:text-gray-300 line-clamp-2">{excerpt}</p>

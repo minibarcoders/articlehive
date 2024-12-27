@@ -21,7 +21,7 @@ export const Feed = ({ items }: { items: FeedItem[] }) => {
       case 'review':
         return <Star className="w-5 h-5 text-yellow-500" />;
       case 'guide':
-        return <BookOpen className="w-5 h-5 text-purple-500" />;
+        return <BookOpen className="w-5 h-5 text-sky-500" />;
       case 'post':
         return <MessageSquare className="w-5 h-5 text-blue-500" />;
     }
@@ -35,7 +35,7 @@ export const Feed = ({ items }: { items: FeedItem[] }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
-          className="group bg-gradient-to-br from-background via-background to-accent/10 dark:from-gray-900 dark:via-gray-900/95 dark:to-purple-900/10 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-border/5 transform hover:-translate-y-1 hover:scale-[1.01]"
+          className="group bg-gradient-to-br from-background via-background to-accent/10 dark:from-gray-900 dark:via-gray-900/95 dark:to-sky-900/10 rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-border/5 transform hover:-translate-y-1 hover:scale-[1.01]"
         >
           <div className="flex items-start gap-4">
             <div className="flex-shrink-0 transform transition-transform duration-300 group-hover:scale-110">

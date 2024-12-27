@@ -17,10 +17,10 @@ export const FeaturedSection = ({ featuredArticle, popularGuide }: FeaturedSecti
             <div className="bg-[#F1F0FB] dark:bg-gray-800/90 rounded-2xl p-8 transition-all duration-300">
               <div className="flex justify-between items-center mb-12">
                 <div>
-                  <h2 className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">Featured Reviews</h2>
+                  <h2 className="text-3xl font-bold text-sky-600 dark:text-sky-400 mb-2">Featured Reviews</h2>
                   <p className="text-gray-600 dark:text-gray-300">Our most recent in-depth tech reviews</p>
                 </div>
-                <Link to="/reviews" className="text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium">
+                <Link to="/reviews" className="text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 font-medium">
                   View all reviews →
                 </Link>
               </div>
@@ -47,10 +47,10 @@ export const FeaturedSection = ({ featuredArticle, popularGuide }: FeaturedSecti
             <div className="bg-[#E5F6FF] dark:bg-gray-800/80 rounded-2xl p-8 transition-all duration-300">
               <div className="flex justify-between items-center mb-12">
                 <div>
-                  <h2 className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">Most Read Guides</h2>
+                  <h2 className="text-3xl font-bold text-sky-600 dark:text-sky-400 mb-2">Most Read Guides</h2>
                   <p className="text-gray-600 dark:text-gray-300">Popular tech guides and tutorials</p>
                 </div>
-                <Link to="/guides" className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium">
+                <Link to="/guides" className="text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 font-medium">
                   View all guides →
                 </Link>
               </div>
