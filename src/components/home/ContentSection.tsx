@@ -14,7 +14,7 @@ export const ContentSection = ({ feedItems, popularItems }: ContentSectionProps)
           <div>
             <div className="flex justify-between items-center mb-12">
               <div>
-                <h2 className="text-4xl font-bold text-foreground mb-4">Latest Updates</h2>
+                <h2 className="text-4xl font-bold text-primary mb-4">Latest Updates</h2>
                 <p className="text-xl text-foreground/90 dark:text-gray-300">Stay up to date with our latest content</p>
               </div>
             </div>

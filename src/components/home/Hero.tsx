@@ -5,7 +5,7 @@ export const Hero = () => {
   return (
     <section className="relative bg-background pt-32 pb-24">
       <div className="container mx-auto px-4 text-center">
-        <h1 className="text-6xl font-bold mb-6 text-foreground">
+        <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
           Your Trusted Source
           <br />
           for Tech Reviews
